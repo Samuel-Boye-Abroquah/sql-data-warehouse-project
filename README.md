@@ -49,7 +49,7 @@ This project showcases my ability to design data solutions, build analytical mod
 ### 📫 Connect With Me
 
 - LinkedIn: www.linkedin.com/in/samuel-boye-abroquah
-- GitHub: github.com/samuel-boyea-broquah
+- GitHub: github.com/samuel-boye-abroquah
 - Email: abroquahsamuel@gmail.com
 
 Thank you for visiting my project repository! ⭐
