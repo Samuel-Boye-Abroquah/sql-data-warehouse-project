@@ -1,0 +1,104 @@
+
+
+    -- =========================================================
+    -- CRM CUSTOMER INFORMATION
+    -- =========================================================
+
+    TRUNCATE TABLE bronze_crm_cus_info;
+
+    SET SESSION sql_mode = '';
+
+    LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/cust_info.csv'
+    INTO TABLE bronze_crm_cus_info
+    FIELDS TERMINATED BY ','
+    OPTIONALLY ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS;
+
+    SHOW WARNINGS;
+
+    -- =========================================================
+    -- CRM PRODUCT INFORMATION
+    -- =========================================================
+
+    TRUNCATE TABLE bronze_crm_prd_info;
+
+    SET SESSION sql_mode = '';
+
+    LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/prd_info.csv'
+    INTO TABLE bronze_crm_prd_info
+    FIELDS TERMINATED BY ','
+    OPTIONALLY ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS;
+
+    SHOW WARNINGS;
+
+    -- =========================================================
+    -- CRM SALES DETAILS
+    -- =========================================================
+
+    TRUNCATE TABLE bronze_crm_sales_details;
+
+    SET SESSION sql_mode = '';
+
+    LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales_details.csv'
+    INTO TABLE bronze_crm_sales_details
+    FIELDS TERMINATED BY ','
+    OPTIONALLY ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS;
+
+    SHOW WARNINGS;
+
+    -- =========================================================
+    -- ERP CUSTOMER DETAILS
+    -- =========================================================
+
+    TRUNCATE TABLE bronze_erp_cust_az12;
+
+    SET SESSION sql_mode = '';
+
+    LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/CUST_AZ12.csv'
+    INTO TABLE bronze_erp_cust_az12
+    FIELDS TERMINATED BY ','
+    OPTIONALLY ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS;
+
+    SHOW WARNINGS;
+
+    -- =========================================================
+    -- ERP CUSTOMER LOCATION
+    -- =========================================================
+
+    TRUNCATE TABLE bronze_erp_loc_a101;
+
+    SET SESSION sql_mode = '';
+
+    LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/LOC_A101.csv'
+    INTO TABLE bronze_erp_loc_a101
+    FIELDS TERMINATED BY ','
+    OPTIONALLY ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS;
+
+    SHOW WARNINGS;
+
+    -- =========================================================
+    -- ERP PRODUCT CATEGORY
+    -- =========================================================
+
+    TRUNCATE TABLE bronze_erp_px_cat_g1v2;
+
+    SET SESSION sql_mode = '';
+
+    LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/PX_CAT_G1V2.csv'
+    INTO TABLE bronze_erp_px_cat_g1v2
+    FIELDS TERMINATED BY ','
+    OPTIONALLY ENCLOSED BY '"'
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS;
+
+    SHOW WARNINGS;
+
