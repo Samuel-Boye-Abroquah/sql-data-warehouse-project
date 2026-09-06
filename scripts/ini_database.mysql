@@ -1,0 +1,27 @@
+/*
+=============================================================
+CREATE DATAWAREHOUSE DATABASE
+=============================================================
+
+Purpose:
+    Creates a single DataWarehouse database that contains
+    all Bronze, Silver, and Gold layer tables.
+
+Architecture:
+    Bronze Layer : Raw source data
+    Silver Layer : Cleaned and transformed data
+    Gold Layer   : Business-ready analytical data
+
+Author:
+    Samuel Boye Abroquah
+=============================================================
+*/
+
+-- Drop existing database
+DROP DATABASE IF EXISTS DataWarehouse;
+
+-- Create database
+CREATE DATABASE DataWarehouse;
+
+-- Use database
+USE DataWarehouse;
