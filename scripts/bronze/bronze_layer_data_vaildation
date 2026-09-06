@@ -1,0 +1,50 @@
+/*
+=============================================================
+VALIDATE BRONZE LAYER LOAD
+=============================================================
+
+Purpose:
+    Verify that all Bronze layer tables have been loaded
+    successfully by checking the number of records imported
+    into each table.
+
+Expected Outcome:
+    Row counts should match the source files, confirming
+    successful data ingestion into the Bronze layer.
+
+=============================================================
+*/
+
+SELECT 'bronze_crm_cus_info' AS measure,
+       COUNT(*) AS rows_count
+FROM bronze_crm_cus_info
+
+UNION ALL
+
+SELECT 'bronze_crm_prd_info',
+       COUNT(*)
+FROM bronze_crm_prd_info
+
+UNION ALL
+
+SELECT 'bronze_crm_sales_details',
+       COUNT(*)
+FROM bronze_crm_sales_details
+
+UNION ALL
+
+SELECT 'bronze_erp_cust_az12',
+       COUNT(*)
+FROM bronze_erp_cust_az12
+
+UNION ALL
+
+SELECT 'bronze_erp_loc_a101',
+       COUNT(*)
+FROM bronze_erp_loc_a101
+
+UNION ALL
+
+SELECT 'bronze_erp_px_cat_g1v2',
+       COUNT(*)
+FROM bronze_erp_px_cat_g1v2;
