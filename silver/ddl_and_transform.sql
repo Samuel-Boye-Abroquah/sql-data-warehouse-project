@@ -42,7 +42,6 @@ CREATE TABLE silver_crm_cus_info (
 
 CREATE TABLE silver_crm_prd_info (
     prd_id           INT,
-    prd_key          VARCHAR(50),
     cat_id           VARCHAR(50),
     product_key      VARCHAR(50),
     prd_nm           VARCHAR(50),
@@ -154,7 +153,6 @@ WHERE TRIM(cst_id) != ''
 INSERT INTO silver_crm_prd_info
 SELECT
     prd_id,
-    prd_key,
     REPLACE(LEFT(TRIM(prd_key), 5), '-', '_') AS cat_id,
     SUBSTRING(prd_key, 7, LENGTH(prd_key)) AS product_key,
     prd_nm,
