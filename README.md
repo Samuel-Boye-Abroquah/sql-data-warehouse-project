@@ -162,5 +162,4 @@ Documented transparently rather than hidden — every real project has trade-off
 Built by **Samuel Boye Abroquah** — Quality Assurance & Data Analytics professional, applying 12+ years of process-validation discipline to data engineering.
 
    [LinkedIn](https://linkedin.com/in/Samuel-Boye-Abroquah)
-- 📧 Email: **abroquahsamuel@gmail.com**
   
