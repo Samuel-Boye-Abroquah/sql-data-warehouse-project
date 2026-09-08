@@ -15,6 +15,21 @@ This project covers the full lifecycle of a data warehouse: raw ingestion, data 
 - **Gold** — business-ready star schema (`dim_customers`, `dim_products`, `fact_sales`), built as views on top of Silver with surrogate keys, ready for reporting.
 
 ---
+## 📖 Project Overview
+This project involves:
+
+Data Architecture: Designing a Modern Data Warehouse Using Medallion Architecture Bronze, Silver, and Gold layers.
+ETL Pipelines: Extracting, transforming, and loading data from source systems into the warehouse.
+Data Modeling: Developing fact and dimension tables optimized for analytical queries.
+Analytics & Reporting: Creating SQL-based reports and dashboards for actionable insights.
+🎯 This repository is an excellent resource for professionals and students looking to showcase expertise in:
+
+SQL Development
+Data Architect
+Data Engineering
+ETL Pipeline Developer
+Data Modeling
+Data Analytics
 
 ## Repository Structure
 
