@@ -2,46 +2,61 @@
 
 An end-to-end data warehouse built from raw CRM and ERP source files through a full **Bronze → Silver → Gold (Medallion Architecture)** pipeline in MySQL, feeding a Power BI reporting layer via ODBC.
 
-This project is a hands-on build covering the full lifecycle of a data warehouse: raw ingestion, data cleaning and standardization, dimensional modeling, data quality validation, and documentation — not just a single script, but a repeatable, documented pipeline.
+This project covers the full lifecycle of a data warehouse: raw ingestion, data cleaning and standardization, dimensional modeling, data quality validation, and documentation — a repeatable, documented pipeline, not a single script.
 
 ---
 
 ## Architecture
 
-![Data Flow: Source to Gold Layer](docs/data_flow_bronze_silver_gold.png)
+![Data Flow: Source to Gold Layer](documents/data_flow_bronze_silver_gold.png)
 
 - **Bronze** — raw data loaded exactly as extracted from source (CRM and ERP), untouched.
 - **Silver** — cleaned, standardized, and deduplicated: consistent codes (gender, marital status, country, product line), validated dates, corrected price/quantity/sales inconsistencies.
-- **Gold** — business-ready star schema: `dim_customers`, `dim_products`, and `fact_sales`, built as views on top of Silver with surrogate keys, ready for reporting.
+- **Gold** — business-ready star schema (`dim_customers`, `dim_products`, `fact_sales`), built as views on top of Silver with surrogate keys, ready for reporting.
+
+---
+
+## Repository Structure
+
+```
+sql-data-warehouse-project/
+├── Dataset/
+│   ├── source_crm/
+│   │   ├── cust_info.csv
+│   │   ├── prd_info.csv
+│   │   └── sales_details.csv
+│   └── source_erp/
+│       ├── CUST_AZ12.csv
+│       ├── LOC_A101.csv
+│       └── PX_CAT_G1V2.csv
+├── documents/
+│   ├── Naming_Conventions.docx
+│   ├── gold_layer_data_catalog.docx
+│   ├── data_flow_bronze_silver_gold.png
+│   └── data_warehouse_architecture.png
+├── scripts/
+│   ├── bronze/
+│   │   └── bronze_layer_ddl.sql      # Raw table DDL + load
+│   ├── silver/
+│   │   └── ddl_and_transform.sql     # Cleaning, standardization, transformation
+│   └── gold/
+│       └── ddl_gold.sql              # Business-ready views
+├── test/                             # Data quality validation queries
+├── ini_database.mysql                # Database + schema initialization
+├── LICENSE
+└── README.md
+```
+
+> Source CSVs are included directly in the repo (`Dataset/`) so the full pipeline can be run end-to-end from a clean database.
 
 ---
 
 ## Data Sources
 
-| System | Tables |
+| System | Files |
 |---|---|
-| **CRM** | `crm_sales_details`, `crm_cust_info`, `crm_prd_info` |
-| **ERP** | `erp_cust_az12` (customer demographics), `erp_loc_a101` (location), `erp_px_cat_g1v2` (product category) |
-
----
-
-## Project Structure
-
-```
-sql-data-warehouse-project/
-├── scripts/
-│   ├── bronze/          # Raw table DDL and load scripts
-│   ├── silver/          # Cleaning, standardization, and transformation logic
-│   └── gold/            # Business-ready views: dim_customers, dim_products, fact_sales
-├── tests/
-│   └── quality_checks/  # Data quality validation queries, organized by source table
-└── docs/
-    ├── data_flow_bronze_silver_gold.png
-    ├── Naming_Conventions.docx
-    └── Gold_Layer_Data_Catalog.docx
-    └──
-    └──
-```
+| **CRM** | `cust_info.csv`, `prd_info.csv`, `sales_details.csv` |
+| **ERP** | `CUST_AZ12.csv` (customer demographics), `LOC_A101.csv` (location), `PX_CAT_G1V2.csv` (product category) |
 
 ---
 
@@ -53,13 +68,14 @@ The Gold layer is a standard star schema:
 - **`dim_customers`** — CRM customer records enriched with ERP demographic and location data
 - **`dim_products`** — CRM product records enriched with ERP category data, filtered to current product versions
 
-
+Full column-level definitions: [`documents/gold_layer_data_catalog.docx`](documents/gold_layer_data_catalog.docx).
+Naming standards for schemas, tables, and columns: [`documents/Naming_Conventions.docx`](documents/Naming_Conventions.docx).
 
 ---
 
 ## Data Quality
 
-Every Silver table is validated before being trusted downstream. Checks include:
+Every Silver table is validated before being trusted downstream (see `test/`). Checks include:
 
 - Primary key null/duplicate checks on every source table
 - Whitespace and formatting consistency
@@ -69,8 +85,6 @@ Every Silver table is validated before being trusted downstream. Checks include:
 - Referential integrity between `fact_sales` and both dimension tables
 - Cross-source key alignment between CRM and ERP customer records
 - Duplicate checks on keys that are only created by a cleaning transformation itself (e.g. the ERP `NAS`-prefix strip)
-
-Full validation queries: [`tests/quality_checks/`](tests/quality_checks).
 
 ---
 
@@ -87,11 +101,12 @@ Full validation queries: [`tests/quality_checks/`](tests/quality_checks).
 
 ## How to Run
 
-1. Run the bronze layer scripts to create and load raw tables from source CSVs.
-2. Run `scripts/silver/` to build the cleaned Silver layer.
-3. Run `scripts/gold/` to create the Gold layer views.
-4. Run the scripts in `tests/quality_checks/` to validate each layer before trusting it.
-5. Connect Power BI Desktop to the database via ODBC and build the reporting layer on top of the Gold views.
+1. Run `ini_database.mysql` to create the database and schema.
+2. Run `scripts/bronze/bronze_layer_ddl.sql` to create and load raw tables from `Dataset/`.
+3. Run `scripts/silver/ddl_and_transform.sql` to build the cleaned Silver layer.
+4. Run `scripts/gold/ddl_gold.sql` to create the Gold layer views.
+5. Run the validation queries in `test/` to confirm each layer before trusting it.
+6. Connect Power BI Desktop to the database via ODBC and build the reporting layer on top of the Gold views.
 
 ---
 
@@ -99,10 +114,11 @@ Full validation queries: [`tests/quality_checks/`](tests/quality_checks).
 
 Documented transparently rather than hidden — every real project has trade-offs, and these are the ones I'm aware of in this build:
 
-- **`sls_price` / `sls_sales` correction logic** in the Silver layer computes both values independently from the same raw source row rather than referencing each other's cleaned result — a narrow edge case (raw price null, raw sales otherwise valid) can pass without correction. Noted in the script; a staged subquery would close this fully.
+- **`sls_price` / `sls_sales` correction logic** in the Silver layer computes both values independently from the same raw source row rather than referencing each other's cleaned result — a narrow edge case (raw price null, raw sales otherwise valid) can pass without correction. A staged subquery would close this fully.
 - **`prd_end_dt` versioning** is derived by partitioning on product *name* rather than a stable product key — correct for this dataset, but would need revisiting if product names are ever reused or inconsistently formatted.
-- **Naming convention documentation** currently has a couple of inconsistencies against the actual implementation (flagged directly in `docs/Naming_Conventions.docx`) — pending reconciliation between the documented standard and the tables as built.
-- **Stored procedures** are not yet implemented — Bronze and Silver layers currently run as plain SQL scripts rather than encapsulated, parameterized procedures. Documented as the intended next step.
+- **Naming convention documentation** currently has a couple of inconsistencies against the actual implementation (flagged directly in `documents/Naming_Conventions.docx`) — pending reconciliation between the documented standard and the tables as built.
+- **`ini_database.mysql`** initializes the whole database but currently lives inside the gold-layer folder structure conceptually — a candidate to move to the repo root or a dedicated setup folder.
+- **Power BI dashboard** — architecture and data are complete; the reporting layer is the current in-progress step.
 
 ---
 
@@ -111,4 +127,3 @@ Documented transparently rather than hidden — every real project has trade-off
 Built by **Samuel Boye Abroquah** — Quality Assurance & Data Analytics professional, applying 12+ years of process-validation discipline to data engineering.
 
 [LinkedIn](https://linkedin.com/in/Samuel-Boye-Abroquah)
-[email](abroquahsamuel@gmail.com)
