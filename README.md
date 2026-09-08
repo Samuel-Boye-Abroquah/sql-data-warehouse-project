@@ -32,7 +32,7 @@ Data Modeling
 Data Analytics
 
 ---
-🚀 Project Requirements
+## 🚀 Project Requirements
 Building the Data Warehouse (Data Engineering)
 Objective
 Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analytical reporting and informed decision-making.
