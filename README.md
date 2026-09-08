@@ -163,4 +163,4 @@ Built by **Samuel Boye Abroquah** — Quality Assurance & Data Analytics profess
 
 - 📧 Email: **abroquahsamuel@gmail.com**
   
-[LinkedIn](https://linkedin.com/in/Samuel-Boye-Abroquah)
+- LinkedIn](https://linkedin.com/in/Samuel-Boye-Abroquah)
