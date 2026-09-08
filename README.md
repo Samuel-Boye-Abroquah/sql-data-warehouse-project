@@ -69,6 +69,7 @@ sql-data-warehouse-project/
 ├── documents/
 │   ├── Naming_Conventions.docx
 │   ├── gold_layer_data_catalog.docx
+|   ├── data_modling.png
 │   ├── data_flow_bronze_silver_gold.png
 │   └── data_warehouse_architecture.png
 ├── scripts/
@@ -105,8 +106,6 @@ The Gold layer is a standard star schema:
 - **`dim_customers`** — CRM customer records enriched with ERP demographic and location data
 - **`dim_products`** — CRM product records enriched with ERP category data, filtered to current product versions
 
-Full column-level definitions: [`documents/gold_layer_data_catalog.docx`](documents/gold_layer_data_catalog.docx).
-Naming standards for schemas, tables, and columns: [`documents/Naming_Conventions.docx`](documents/Naming_Conventions.docx).
 
 ---
 
@@ -158,9 +157,9 @@ Documented transparently rather than hidden — every real project has trade-off
 - **Power BI dashboard** — architecture and data are complete; the reporting layer is the current in-progress step.
 
 ---
-
 ## About
 
 Built by **Samuel Boye Abroquah** — Quality Assurance & Data Analytics professional, applying 12+ years of process-validation discipline to data engineering.
 
-[LinkedIn](https://linkedin.com/in/Samuel-Boye-Abroquah)
+- 📧 Email: **abroquahsamuel@gmail.com**
+- 🔗 LinkedIn: https://linkedin.com/in/Samuel-Boye-Abroquah
