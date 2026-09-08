@@ -53,7 +53,7 @@ Sales Trends
 These insights empower stakeholders with key business metrics, enabling strategic decision-making.
 
 ---
-## Repository Structure
+## 📂 Repository Structure
 
 ```
 sql-data-warehouse-project/
