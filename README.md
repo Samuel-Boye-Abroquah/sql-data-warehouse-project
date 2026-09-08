@@ -8,7 +8,7 @@ This project covers the full lifecycle of a data warehouse: raw ingestion, data 
 
 ## Architecture
 
-![Data Flow: Source to Gold Layer](documents/data_flow_bronze_silver_gold.png)
+![Data Flow: Source to Gold Layer](documents/data_warehouse_architecture.png)
 
 - **Bronze** — raw data loaded exactly as extracted from source (CRM and ERP), untouched.
 - **Silver** — cleaned, standardized, and deduplicated: consistent codes (gender, marital status, country, product line), validated dates, corrected price/quantity/sales inconsistencies.
