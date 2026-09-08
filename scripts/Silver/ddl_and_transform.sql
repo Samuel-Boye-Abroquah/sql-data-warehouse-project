@@ -1,17 +1,3 @@
--- =============================================================================
--- Silver Layer: DDL + Transformation & Load
--- Data Warehouse Project (Bronze -> Silver -> Gold, Medallion Architecture)
---
--- Purpose:
---   Rebuilds the silver layer from scratch. Silver takes the raw, untouched
---   bronze tables and applies cleaning, standardization, and light business
---   logic (deduplication, code-to-label mapping, derived columns) so that
---   downstream gold-layer views can consume trustworthy, consistent data.
---
--- Source tables : bronze_crm_*, bronze_erp_*  (raw, as loaded from CSV)
--- Output tables : silver_crm_*, silver_erp_*  (cleaned, standardized)
--- =============================================================================
-
 USE DataWarehouse;
 
 -- =============================================================================
