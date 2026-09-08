@@ -41,6 +41,7 @@ CREATE TABLE bronze_crm_cus_info (
 
 TRUNCATE TABLE bronze_crm_cus_info;
 
+SET SESSION sql_mode = '';
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/cust_info.csv'
 INTO TABLE bronze_crm_cus_info
 FIELDS TERMINATED BY ','
@@ -69,6 +70,7 @@ CREATE TABLE bronze_crm_prd_info (
 
 TRUNCATE TABLE bronze_crm_prd_info;
 
+SET SESSION sql_mode = '';
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/prd_info.csv'
 INTO TABLE bronze_crm_prd_info
 FIELDS TERMINATED BY ','
@@ -99,6 +101,7 @@ CREATE TABLE bronze_crm_sales_details (
 
 TRUNCATE TABLE bronze_crm_sales_details;
 
+SET SESSION sql_mode = '';
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales_details.csv'
 INTO TABLE bronze_crm_sales_details
 FIELDS TERMINATED BY ','
@@ -123,6 +126,7 @@ CREATE TABLE bronze_erp_cust_az12 (
 
 TRUNCATE TABLE bronze_erp_cust_az12;
 
+SET SESSION sql_mode = '';
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/CUST_AZ12.csv'
 INTO TABLE bronze_erp_cust_az12
 FIELDS TERMINATED BY ','
@@ -146,6 +150,7 @@ CREATE TABLE bronze_erp_loc_a101 (
 
 TRUNCATE TABLE bronze_erp_loc_a101;
 
+SET SESSION sql_mode = '';
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/LOC_A101.csv'
 INTO TABLE bronze_erp_loc_a101
 FIELDS TERMINATED BY ','
@@ -171,6 +176,7 @@ CREATE TABLE bronze_erp_px_cat_g1v2 (
 
 TRUNCATE TABLE bronze_erp_px_cat_g1v2;
 
+SET SESSION sql_mode = '';
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/PX_CAT_G1V2.csv'
 INTO TABLE bronze_erp_px_cat_g1v2
 FIELDS TERMINATED BY ','
@@ -185,3 +191,17 @@ SHOW WARNINGS;
 END OF BRONZE LAYER LOAD
 =============================================================
 */
+
+-- =============================================================================
+-- Silver Layer: DDL + Transformation & Load
+-- Data Warehouse Project (Bronze -> Silver -> Gold, Medallion Architecture)
+--
+-- Purpose:
+--   Rebuilds the silver layer from scratch. Silver takes the raw, untouched
+--   bronze tables and applies cleaning, standardization, and light business
+--   logic (deduplication, code-to-label mapping, derived columns) so that
+--   downstream gold-layer views can consume trustworthy, consistent data.
+--
+-- Source tables : bronze_crm_*, bronze_erp_*  (raw, as loaded from CSV)
+-- Output tables : silver_crm_*, silver_erp_*  (cleaned, standardized)
+-- =============================================================================
