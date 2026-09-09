@@ -4,6 +4,13 @@ An end-to-end data warehouse built from raw CRM and ERP source files through a f
 
 This project covers the full lifecycle of a data warehouse: raw ingestion, data cleaning and standardization, dimensional modeling, data quality validation, and documentation — a repeatable, documented pipeline, not a single script.
 
+## Dataset & Credits
+
+The source CRM and ERP CSV files, and the original project concept, are from
+**[Data With Baraa](https://github.com/DataWithBaraa)**'s
+[sql-data-warehouse-project](https://github.com/DataWithBaraa/sql-data-warehouse-project)
+(MIT License), used here for portfolio and educational purposes.
+
 ---
 
 ## Architecture
