@@ -129,6 +129,12 @@ Every Silver table is validated before being trusted downstream (see `test/`). C
 - Cross-source key alignment between CRM and ERP customer records
 - Duplicate checks on keys that are only created by a cleaning transformation itself (e.g. the ERP `NAS`-prefix strip)
 
+| File | What it checks |
+| :--- | :--- |
+| `bronze_checks.sql` | Row counts, column nullability |
+| `silver_checks.sql` | Duplicates, code standardization, date validity |
+| `gold_checks.sql` | Referential integrity between fact and dimensions |
+
 ---
 
 ## Tools & Technologies
